@@ -1,3 +1,8 @@
+# Fork
+
+添加国民N32G031芯片的支持
+
+
 # Welcome to OpenOCD
 
 OpenOCD provides on-chip programming and debugging support with a
