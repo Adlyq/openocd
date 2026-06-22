@@ -119,7 +119,7 @@ static int cmsis_dap_tcp_open(struct cmsis_dap *dap,
 {
 	// Skip the open if the user has not provided a hostname.
 	if (!cmsis_dap_tcp_host) {
-		LOG_DEBUG("No TCP hostname, skipping open.");
+		LOG_ERROR("The hostname or IP address of the CMSIS-DAP adapter must be specified");
 		return ERROR_FAIL;
 	}
 
@@ -139,8 +139,7 @@ static int cmsis_dap_tcp_open(struct cmsis_dap *dap,
 	int fd = 0;
 
 	LOG_INFO("CMSIS-DAP: Connecting to %s:%s using TCP backend",
-			cmsis_dap_tcp_host ? cmsis_dap_tcp_host : "localhost",
-			cmsis_dap_tcp_port);
+			cmsis_dap_tcp_host, cmsis_dap_tcp_port);
 
 	/* Some of the following code was taken from remote_bitbang.c */
 	/* Obtain address(es) matching host/port */
@@ -174,8 +173,7 @@ static int cmsis_dap_tcp_open(struct cmsis_dap *dap,
 
 	if (!rp) { /* No address succeeded */
 		LOG_ERROR("CMSIS-DAP: unable to connect to device %s:%s",
-			cmsis_dap_tcp_host ? cmsis_dap_tcp_host : "localhost",
-			cmsis_dap_tcp_port);
+			cmsis_dap_tcp_host, cmsis_dap_tcp_port);
 		log_socket_error("Failed to connect");
 		free(dap->bdata);
 		dap->bdata = NULL;
